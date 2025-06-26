@@ -2,11 +2,13 @@
 import Link from 'next/link'
 import React from 'react'
 import { FaAngleRight } from "react-icons/fa";
-import ProductDetails from './ProductDetailsComponent/ProductDetails';
-import RelatedProduct from './ProductDetailsComponent/RelatedProduct';
+
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import UpSellProduct from './ProductDetailsComponent/UpSellProduct';
+import ProductDetails from '../ProductDetailsComponent/ProductDetails';
+import RelatedProduct from '../ProductDetailsComponent/RelatedProduct';
+import UpSellProduct from '../ProductDetailsComponent/UpSellProduct';
+
 export default function page() {
     return (
         <>

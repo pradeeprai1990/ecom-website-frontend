@@ -46,7 +46,9 @@ export default function BestSelling() {
             <section className='max-w-full my-3' id='bestSelling'>
                 <div className='max-w-[1320px] lg:mx-auto sm:mx-2 mx-2' >
                     <div className='flex items-center gap-3'>
-                        <h2 className='lg:text-2xl sm:text-lg text-sm font-semibold '>Bestselling Products
+                        <h2 className='lg:text-2xl sm:text-lg text-sm font-semibold '>Bestselling
+                        
+                         Products
                         </h2>
                         <div className=' border-1  lg:w-[80%] sm:w-[70%] w-[50%] border-gray-200'></div>
                     </div>
