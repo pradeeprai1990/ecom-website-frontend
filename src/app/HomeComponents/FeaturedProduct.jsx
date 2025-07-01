@@ -2,7 +2,8 @@ import axios from 'axios';
 import Link from 'next/link';
 import React, { useState } from 'react'
 import { FaRegHeart } from "react-icons/fa";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCart } from '../slice/cartSlice';
 
 export default function FeaturedProduct({ productImagePath, productData, productType, setproductType }) {
 
@@ -47,7 +48,8 @@ export default function FeaturedProduct({ productImagePath, productData, product
 function ProductItems({ items, productImagePath }) {
     let token = useSelector((store) => store.login.token)
     let [color, setColor] = useState(items.productColor[0]._id)
-    console.log(items)
+    let dispatch=useDispatch()
+   
     let user = useSelector((store) => store.login.user)
     let apiBaseUrl = process.env.NEXT_PUBLIC_APIBASEURL
     let addToCart = () => {
@@ -72,7 +74,7 @@ function ProductItems({ items, productImagePath }) {
                 })
                 .then((res) => {
                     if (res.data.status) {
-    
+                        dispatch(fetchCart())
                     }
                     else {
                         alert(res.data.msg)
