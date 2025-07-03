@@ -35,8 +35,8 @@ export const cartSlice = createSlice({
    //action  = api data=> payload
     builder.addCase(fetchCart.fulfilled, (state, action) => {
       // Add user to the state array
-      state.cart=action.payload.cartData,
-      state.imagePath=action.payload.staticPath
+      state.cart=action.payload.cartData ?? []
+      state.imagePath=action.payload.staticPath ?? ''
     })
   },
 
