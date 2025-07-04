@@ -40,6 +40,20 @@ export default function page() {
  }
 
 
+ let getOrders=()=>{
+    axios.post(
+        `${apiBaseUrl}order/view-order`,
+        {},
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .then((res) => {
+            console.log(res.data)
+        })
+ }
+
 
     let changePassword = (e) => {
         let oldPassword = e.target.oldPassword.value
@@ -75,6 +89,7 @@ export default function page() {
 
     useEffect(()=>{
         userData()
+        getOrders()
     },[])
     return (
         <>

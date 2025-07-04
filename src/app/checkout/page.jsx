@@ -5,11 +5,13 @@ import { FaAngleRight } from "react-icons/fa";
 import { Country } from '../data/Country';
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { RiArrowDropUpLine } from "react-icons/ri";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { useRazorpay} from "react-razorpay";
+import { fetchCart } from '../slice/cartSlice';
 
 export default function Checkout() {
+    let dispatch=useDispatch()
     const {  Razorpay } = useRazorpay();
     let [countryBillingButton, setcountryBillingButton] = useState(0)
 
@@ -69,7 +71,9 @@ export default function Checkout() {
             .then((res) => res.data)
             .then((res)=>{
                 if(res.paymentMethod=="1"){ //COD
-                    //Thank you page
+                    
+                    dispatch(fetchCart())
+                     //Thank You Page
                 }
                 else{  //Online
 
@@ -83,7 +87,20 @@ export default function Checkout() {
                         handler: (response) => {
                           console.log(response);
                           //razorpay_payment_id: 'pay_Qofh90kAeYHp7P', razorpay_order_id: 'order_QoffF9Y9PE9rB9', razorpay_signature: '37868029ac826841d8647b0f50cb27e97b7986b5e72cf8f2f4d22db09d1dcce1'}
-                         
+                          axios.post(
+                            `${apiBaseUrl}order/verify-order`,
+                            response,
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${token}`
+                                }
+                            })
+                            .then((res) => res.data)
+                            .then((res)=>{
+                                dispatch(fetchCart())
+                                console.log(res)
+                                //Thank You Page
+                            }) 
                         },
                         prefill: {
                           name: "John Doe",
